@@ -1,57 +1,36 @@
-// This script handles the avatar flip animation and mode toggle functionality
+// ===================== THEME TOGGLE =====================
 
-document.addEventListener("DOMContentLoaded", () => {
-  // Always start in static mode
-  document.body.setAttribute("data-mode", "static");
+(function () {
+  const btn = document.getElementById("themeToggleBtn");
+  const STORAGE_KEY = "portfolio-theme";
 
-  // Get the toggle dropdown
-  const toggle = document.getElementById("modeToggle");
-  if (!toggle) return;
+  // Apply saved theme immediately (before page paint)
+  const savedTheme = localStorage.getItem(STORAGE_KEY);
+  if (savedTheme === "dark") {
+    document.body.classList.add("dark");
+  }
 
-  // Set dropdown default to "static"
-  toggle.value = "static";
-
-  // Change mode on selection
-  toggle.addEventListener("change", () => {
-    const selectedMode = toggle.value;
-    document.body.setAttribute("data-mode", selectedMode);
-  });
-});
-
-// // this is night theme toggle functionality
-// document.addEventListener("DOMContentLoaded", () => {
-//   const toggleBtn = document.getElementById("themeToggleBtn");
-
-//   toggleBtn.addEventListener("click", () => {
-//     const body = document.body;
-
-//     if (body.classList.contains("dark")) {
-//       body.classList.remove("dark");
-//     } else {
-//       body.classList.add("dark");
-//     }
-//   });
-// });
-  // The function to change the theme
-    function applyTheme(theme) {
-        if (theme === 'dark') {
-            document.body.classList.add('dark');
-        } else {
-            document.body.classList.remove('dark');
-        }
-    }
-
-    // Listen for messages from the parent window (builder.html)
-    window.addEventListener('message', (event) => {
-        const message = event.data;
-
-        if (message.type === 'themeChange') {
-            applyTheme(message.theme);
-        }
-
-        // We will add more message types later, like 'updateName', 'addSkill', etc.
+  if (btn) {
+    btn.addEventListener("click", () => {
+      const isDark = document.body.classList.toggle("dark");
+      localStorage.setItem(STORAGE_KEY, isDark ? "dark" : "light");
     });
+  }
 
+  // Listen for messages from a parent window (e.g. builder.html)
+  window.addEventListener("message", (event) => {
+    const message = event.data;
+    if (message.type === "themeChange") {
+      if (message.theme === "dark") {
+        document.body.classList.add("dark");
+      } else {
+        document.body.classList.remove("dark");
+      }
+    }
+  });
+})();
+
+// ===================== CAROUSEL =====================
 
 let index = 0;
 const carousel = document.getElementById("carousel");
@@ -60,7 +39,6 @@ let messageShown = false;
 let holdTimer = null;
 let isHolding = false;
 
-// --- On DOM Load ---
 document.addEventListener("DOMContentLoaded", () => {
   const projectTemplates = document.getElementById("project-templates");
   const projectBoxes = Array.from(projectTemplates.querySelectorAll(".project-box"));
@@ -71,21 +49,15 @@ document.addEventListener("DOMContentLoaded", () => {
   typeEffect();
 });
 
-// --- Simplified Project Rendering ---
 function renderAllProjects(projectBoxes) {
   const projectsContainer = document.getElementById("projects-container");
-
-  // Clear any existing content
   projectsContainer.innerHTML = "";
-
-  // Append all project boxes into the single container
   projectBoxes.forEach(box => {
     const clone = box.cloneNode(true);
     projectsContainer.appendChild(clone);
   });
 }
 
-// --- Carousel Navigation ---
 function scrollToSlide(slideIndex) {
   index = slideIndex;
   carousel.style.transform = `translateX(-${index * 100}%)`;
@@ -124,6 +96,7 @@ function toggleSlideshow() {
 }
 
 function setupArrowHoldListeners(arrow) {
+  if (!arrow) return;
   arrow.addEventListener("mousedown", startHold);
   arrow.addEventListener("mouseup", cancelHold);
   arrow.addEventListener("mouseleave", cancelHold);
@@ -141,7 +114,8 @@ function cancelHold() {
   clearTimeout(holdTimer);
 }
 
-// --- Typewriter Effect ---
+// ===================== TYPEWRITER =====================
+
 const texts = ["Web Developer", "Python Developer"];
 let textIndex = 0;
 let charIndex = 0;
@@ -176,39 +150,32 @@ function typeEffect() {
   }
 }
 
+// ===================== NAV BUTTONS =====================
 
-// Enhanced navigation functionality with better scrolling
 document.querySelectorAll('.nav-btn').forEach(button => {
-  button.addEventListener('click', function(e) {
+  button.addEventListener('click', function (e) {
     e.preventDefault();
     const targetId = this.getAttribute('href').substring(1);
-    
-    // First scroll to the correct card section
+
     if (targetId === 'about-me' || targetId === 'skills') {
-      scrollCarousel(1); // Scroll to section 2 (About Me)
+      scrollToSlide(1);
     } else if (targetId === 'projects') {
-      scrollCarousel(2); // Scroll to section 3 (Projects)
+      scrollToSlide(2);
     } else if (targetId === 'contact') {
-      scrollCarousel(3); // Scroll to section 4 (Contact)
+      scrollToSlide(3);
     }
 
-    // Then scroll within the section if needed
     setTimeout(() => {
       const targetElement = document.getElementById(targetId);
       if (targetElement) {
-        // Calculate the scroll position considering the card's padding
         const card = targetElement.closest('.card1, .card2, .card3');
-        const cardRect = card.getBoundingClientRect();
-        const elementRect = targetElement.getBoundingClientRect();
-        const scrollPosition = elementRect.top - cardRect.top + card.scrollTop;
-        
-        // Smooth scroll to the element within the card
-        card.scrollTo({
-          top: scrollPosition - 20, // 20px offset from top
-          behavior: 'smooth'
-        });
+        if (card) {
+          const cardRect = card.getBoundingClientRect();
+          const elementRect = targetElement.getBoundingClientRect();
+          const scrollPosition = elementRect.top - cardRect.top + card.scrollTop;
+          card.scrollTo({ top: scrollPosition - 20, behavior: 'smooth' });
+        }
       }
-    }, 500); // Wait for the carousel animation to complete
+    }, 500);
   });
 });
-

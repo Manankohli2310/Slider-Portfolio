@@ -1141,3 +1141,68 @@
     margin-left: -10px;
   }
 }
+/* ===================== RESPONSIVE TOGGLE ===================== */
+@media (max-width: 700px) {
+  .theme-toggle {
+    top: 60px;
+    right: 60px;
+  }
+.toggle-track {
+    width: 50px;
+    height: 26px;
+  }
+
+  .toggle-thumb {
+    width: 19px;
+    height: 19px;
+  }
+
+  body.dark .toggle-thumb {
+    transform: translateX(24px);
+  }
+
+  .sun-icon, .moon-icon {
+    font-size: 9px;
+  }
+}
+@media (max-width: 940px) and (min-width:700px) {
+  .theme-toggle {
+    top: 70px;
+    right: 80px;
+  }
+
+  .toggle-track {
+    width: 50px;
+    height: 26px;
+  }
+
+  .toggle-thumb {
+    width: 19px;
+    height: 19px;
+  }
+
+  body.dark .toggle-thumb {
+    transform: translateX(24px);
+  }
+
+  .sun-icon, .moon-icon {
+    font-size: 9px;
+  }
+}
+
+@media (max-width: 480px) {
+  .theme-toggle {
+    top: 60px;
+    right: 40px;
+  }
+
+  body.dark .toggle-thumb {
+    transform: translateX(22px);
+  }
+}
+@media (min-width:2000px){
+  .theme-toggle {
+    top: 80px;
+    right: 150px;
+  }
+}

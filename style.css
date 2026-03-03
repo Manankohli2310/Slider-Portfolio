@@ -17,6 +17,11 @@
   --border-hover: #f4a259;
   --resume-btn: rgb(235, 153, 71);
   --about-resume-hover-bg: #333;
+
+  /* Toggle specific */
+  --toggle-track-bg: #f1e7db;
+  --toggle-thumb-bg: #fff;
+  --toggle-shadow: rgba(0,0,0,0.15);
 }
 
 body.dark {
@@ -38,6 +43,11 @@ body.dark {
   --border-hover: #f4a259;
   --resume-btn: #0f0f0e;
   --about-resume-hover-bg: #f5c19ec7;
+
+  /* Toggle specific */
+  --toggle-track-bg: #3a2e24;
+  --toggle-thumb-bg: #1a1612;
+  --toggle-shadow: rgba(238, 123, 47, 0.3);
 }
 
 * {
@@ -60,7 +70,128 @@ body {
   overflow-x: hidden;
   scrollbar-width: thin;
   scrollbar-color: var(--scrollbar) transparent;
+  transition: background 0.4s ease;
 }
+
+/* ===================== THEME TOGGLE ===================== */
+
+.theme-toggle {
+  position: fixed;
+  top: 70px;
+  right: 110px;
+  z-index: 1000;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.toggle-track {
+  position: relative;
+  width: 58px;
+  height: 30px;
+  background: var(--toggle-track-bg);
+  border-radius: 50px;
+  display: flex;
+  align-items: center;
+  padding: 3px;
+  box-sizing: border-box;
+  border: 1.5px solid var(--border);
+  box-shadow: 0 2px 10px var(--toggle-shadow);
+  transition: background 0.4s ease, border-color 0.4s ease, box-shadow 0.4s ease;
+  overflow: hidden;
+}
+
+/* Subtle shimmer on the track */
+.toggle-track::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 50px;
+  background: linear-gradient(135deg, rgba(255,255,255,0.08) 0%, transparent 60%);
+  pointer-events: none;
+}
+
+.toggle-thumb {
+  position: relative;
+  width: 22px;
+  height: 22px;
+  background: var(--toggle-thumb-bg);
+  border-radius: 50%;
+  box-shadow: 0 1px 6px rgba(0,0,0,0.25);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1), background 0.4s ease, box-shadow 0.4s ease;
+  will-change: transform;
+  border: 1px solid rgba(255,255,255,0.15);
+}
+
+/* Light mode: sun visible, thumb on left */
+.sun-icon {
+  position: absolute;
+  font-size: 11px;
+  color: #f4a259;
+  opacity: 1;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  transform: scale(1) rotate(0deg);
+}
+
+.moon-icon {
+  position: absolute;
+  font-size: 10px;
+  color: #c79a5e;
+  opacity: 0;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  transform: scale(0.6) rotate(-30deg);
+}
+
+/* Dark mode: moon visible, thumb on right */
+body.dark .toggle-thumb {
+  transform: translateX(28px);
+  background: #2a1f15;
+  box-shadow: 0 1px 6px rgba(238, 123, 47, 0.35);
+}
+
+body.dark .sun-icon {
+  opacity: 0;
+  transform: scale(0.6) rotate(30deg);
+}
+
+body.dark .moon-icon {
+  opacity: 1;
+  transform: scale(1) rotate(0deg);
+  color: var(--typewritter-and-uniquetext);
+}
+
+/* Label icons on the track (stars & sun) */
+.toggle-track::after {
+  content: '☀';
+  position: absolute;
+  right: 7px;
+  font-size: 10px;
+  color: var(--typewritter-and-uniquetext);
+  opacity: 0.5;
+  transition: opacity 0.4s ease;
+  pointer-events: none;
+}
+
+body.dark .toggle-track::after {
+  content: '★';
+  left: 7px;
+  right: auto;
+}
+
+/* Hover glow */
+.theme-toggle:hover .toggle-track {
+  box-shadow: 0 0 12px var(--typewritter-and-uniquetext), 0 2px 10px var(--toggle-shadow);
+  border-color: var(--border-hover);
+}
+
+/* ===================== SCROLLBARS ===================== */
 
 body::-webkit-scrollbar,
 .text::-webkit-scrollbar,
@@ -94,6 +225,8 @@ body::-webkit-scrollbar-thumb:hover,
 .text3::-webkit-scrollbar-thumb:hover {
   background: var(--scrollbar-hover);
 }
+
+/* ===================== LAYOUT ===================== */
 
 .carousel-container {
   display: flex;
@@ -146,7 +279,6 @@ body::-webkit-scrollbar-thumb:hover,
     opacity: 0;
     transform: translate(-50%, 20px);
   }
-
   to {
     opacity: 1;
     transform: translate(-50%, 0);
@@ -170,6 +302,8 @@ body::-webkit-scrollbar-thumb:hover,
   animation: fadein 0.5s ease;
 }
 
+/* ===================== CARDS ===================== */
+
 .card {
   min-width: 100%;
   display: flex;
@@ -179,6 +313,7 @@ body::-webkit-scrollbar-thumb:hover,
   box-sizing: border-box;
   background-color: var(--card-text-bg);
   border-radius: 20px;
+  transition: background-color 0.4s ease;
 }
 
 .text {
@@ -255,12 +390,9 @@ body::-webkit-scrollbar-thumb:hover,
 }
 
 @keyframes breathing-shadow-img {
-
-  0%,
-  100% {
+  0%, 100% {
     box-shadow: 0 0 8px var(--img-box-shadow);
   }
-
   50% {
     box-shadow: 0 0 10px var(--img-box-shadow-dynamic);
   }
@@ -278,6 +410,7 @@ body::-webkit-scrollbar-thumb:hover,
   overflow: hidden;
   display: flex;
   flex-direction: column;
+  transition: background-color 0.4s ease;
 }
 
 .text1 {
@@ -335,6 +468,7 @@ body::-webkit-scrollbar-thumb:hover,
   overflow: hidden;
   display: flex;
   flex-direction: column;
+  transition: background-color 0.4s ease;
 }
 
 .text2 {
@@ -494,6 +628,7 @@ body::-webkit-scrollbar-thumb:hover,
   overflow: hidden;
   display: flex;
   flex-direction: column;
+  transition: background-color 0.4s ease;
 }
 
 .text3 {
@@ -573,6 +708,13 @@ body::-webkit-scrollbar-thumb:hover,
   border-radius: 8px;
   background-color: transparent;
   font-size: 1em;
+  color: var(--text-bg-color);
+  transition: border-color 0.3s ease;
+}
+
+.contact-form input::placeholder,
+.contact-form textarea::placeholder {
+  color: var(--text-paragraph-color);
 }
 
 .contact-form input:focus,
@@ -583,6 +725,7 @@ body::-webkit-scrollbar-thumb:hover,
 
 .contact-form button {
   align-self: flex-start;
+  cursor: pointer;
 }
 
 .social-links {
@@ -618,3 +761,4 @@ body::-webkit-scrollbar-thumb:hover,
   color: var(--text-bg-color);
   font-weight: 600;
 }
+
