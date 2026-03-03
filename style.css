@@ -63,6 +63,7 @@ body {
 }
 
 body::-webkit-scrollbar,
+.text::-webkit-scrollbar,
 .text1::-webkit-scrollbar,
 .text2::-webkit-scrollbar,
 .text3::-webkit-scrollbar {
@@ -70,6 +71,7 @@ body::-webkit-scrollbar,
 }
 
 body::-webkit-scrollbar-track,
+.text::-webkit-scrollbar-track,
 .text1::-webkit-scrollbar-track,
 .text2::-webkit-scrollbar-track,
 .text3::-webkit-scrollbar-track {
@@ -77,6 +79,7 @@ body::-webkit-scrollbar-track,
 }
 
 body::-webkit-scrollbar-thumb,
+.text::-webkit-scrollbar-thumb,
 .text1::-webkit-scrollbar-thumb,
 .text2::-webkit-scrollbar-thumb,
 .text3::-webkit-scrollbar-thumb {
@@ -85,6 +88,7 @@ body::-webkit-scrollbar-thumb,
 }
 
 body::-webkit-scrollbar-thumb:hover,
+.text::-webkit-scrollbar-thumb:hover,
 .text1::-webkit-scrollbar-thumb:hover,
 .text2::-webkit-scrollbar-thumb:hover,
 .text3::-webkit-scrollbar-thumb:hover {
