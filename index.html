@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Kunal Sharma - Portfolio</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="responsiveness.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+
+<body>
+  <div class="carousel-container">
+    <button class="arrow left" onclick="scrollCarousel(-1)">&#10094;</button>
+    <div class="carousel-wrapper">
+
+      <div class="carousel" id="carousel">
+        <!-- Section 1 -->
+
+        <div class="card">
+          <!-- <button id="themeToggleBtn">Toggle Theme</button> -->
+          <div class="text">
+            Hey! I am <span id="orange">Kunal</span><br> and I am a Creative <br>
+            <div id="typewriter"></div>
+            <div class="about-button-group">
+              <a href="#about-me" class="about-btn nav-btn" data-section="1">
+                <i class="fas fa-user"></i>
+                <span>About Me</span>
+              </a>
+              <a href="#skills" class="about-btn nav-btn" data-section="1">
+                <i class="fas fa-code"></i>
+                <span>Skills</span>
+              </a>
+              <a href="#projects" class="about-btn nav-btn" data-section="2">
+                <i class="fas fa-project-diagram"></i>
+                <span>Projects</span>
+              </a>
+              <a href="#contact" class="about-btn nav-btn" data-section="3">
+                <i class="fas fa-comments"></i>
+                <span>Let's Talk</span>
+              </a>
+            </div>
+          </div>
+          <div class="image">
+            <img src="profile.jpg" alt="Profile" />
+          </div>
+        </div>
+
+        <!-- Section 2-->
+        <div class="card1">
+          <div class="text1">
+            <h1 id="about-me">About Me</h1>
+            <p>Hello, I am a dedicated and professional Web Developer with a strong focus on creating modern,
+              responsive, and user-centric websites. I specialize in front-end development, transforming ideas into
+              clean, functional, and visually appealing digital experiences.</p>
+            <p>With a solid understanding of web technologies and design principles, I ensure that every project I work
+              on is optimized for performance, accessibility, and scalability. I am passionate about writing clean,
+              maintainable code and continuously improving my skills to stay aligned with the latest industry
+              standards.</p>
+            <h1 id="skills">Skills</h1>
+            <div class="skills">
+              <span>HTML</span>
+              <span>CSS</span>
+              <span>JS</span>
+              <span>React</span>
+              <span>Python</span>
+              <span>Node.js</span>
+              <span>Git</span>
+              <span>APIs</span>
+              <span>Responsive Design</span>
+              <span>Flask</span>
+              <span>Tensorflow</span>
+              <span>Matplotlib</span>
+
+            </div>
+          </div>
+        </div>
+
+        <!-- Section 3 -->
+        <div class="card2">
+          <div class="text2">
+            <h1 class="work">Work Experience</h1>
+            <div class="experience-list">
+              <div class="experience-item"><span class="year">2010–11:</span class="role"> Junior Web Designer at ABC
+                Co.</div>
+              <div class="experience-item"><span class="year">2012–14:</span class="role"> Front-End Developer at XYZ
+                Ltd.</div>
+              <div class="experience-item"><span class="year">2015–18:</span class="role"> UI/UX Specialist at DesignHub
+              </div>
+              <div class="experience-item"><span class="year">2019–21:</span class="role"> Full-Stack Developer at
+                DevTech</div>
+              <div class="experience-item"><span class="year">2021–22:</span class="role"> Front-End Web Developer at TechNova Solutions
+              </div>
+              <div class="experience-item"><span class="year">2022–23:</span class="role"> Co-Senior Developer at
+                CreativeWorks
+              </div>
+              <div class="experience-item"><span class="year">2023–Present:</span class="role"> Senior Developer at
+                CreativeWorks
+              </div>
+            </div>
+            <h1 id="projects">Projects</h1>
+            <div class="projects" id="projects-container">
+              <!-- Projects dynamically inserted via JS -->
+            </div>
+          </div>
+        </div>
+
+        <!-- Section 4-->
+        <div class="card3">
+          <div class="text3">
+            <h1>Let's Connect!</h1>
+
+            <div class="contact-info">
+              <p><i class="fas fa-envelope"></i> Email: <a href="mailto:you@example.com">you@example.com</a></p>
+              <p><i class="fas fa-phone"></i> Phone: <a href="tel:+911234567890">+91 12345 67890</a></p>
+              <p><i class="fas fa-map-marker-alt"></i> Location: New Delhi, India</p>
+            </div>
+
+            <a href="Manan_Kohli_Resume.pdf" class="resume-btn resume" download>
+              <i class="fas fa-download"></i> Download My Resume
+            </a>
+            <h2>Send Me a Message</h2>
+            <form class="contact-form">
+              <input type="text" placeholder="Your Name" required>
+              <input type="email" placeholder="Your Email" required>
+              <textarea placeholder="Your Message" rows="4" required></textarea>
+              <button type="submit" class="resume-btn">Send Message</button>
+            </form>
+
+            <div class="social-links">
+              <h2>Connect With Me</h2>
+              <a href="https://linkedin.com/in/yourprofile" target="_blank"><i class="fab fa-linkedin"></i></a>
+              <a href="https://github.com/yourprofile" target="_blank"><i class="fab fa-github"></i></a>
+              <a href="https://twitter.com/yourprofile" target="_blank"><i class="fab fa-twitter"></i></a>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <button class="arrow right" onclick="scrollCarousel(1)">&#10095;</button>
+  </div>
+
+  <!-- project templates -->
+  <div id="project-templates" style="display: none;">
+    <div class="project-box" data-project="E-Commerce Web Application">
+      <div class="project-img" style="background-image: url('project1.jpg');"></div>
+      <div class="project-description">
+        <h3>E-Commerce Web Application</h3>
+        <p>A responsive online store with product listing, cart functionality, and secure user authentication.
+        </p>
+      </div>
+      <a href="https://github.com" target="_blank" class="repo-link">View</a>
+    </div>
+    <div class="project-box" data-project="Task Management App">
+      <div class="project-img" style="background-image: url('project2.jpg');"></div>
+      <div class="project-description">
+        <h3>Task Management App</h3>
+        <p>A productivity web app that allows users to create, manage, and track daily tasks efficiently.
+        </p>
+      </div>
+      <a href="https://github.com" target="_blank" class="repo-link">View</a>
+    </div>
+    <div class="project-box" data-project="Weather Forecast App">
+      <div class="project-img" style="background-image: url('project3.jpg');"></div>
+      <div class="project-description">
+        <h3>Weather Forecast App</h3>
+        <p>A real-time weather application that fetches and displays live data using a public API.</p>
+      </div>
+      <a href="https://github.com" target="_blank" class="repo-link">View</a>
+    </div>
+    <div class="project-box" data-project="Blogging Platform">
+      <div class="project-img" style="background-image: url('project4.jpg');"></div>
+      <div class="project-description">
+        <h3>Blogging Platform</h3>
+        <p>A dynamic blog website where users can create, edit, and publish articles.</p>
+      </div>
+      <a href="https://github.com" target="_blank" class="repo-link">View</a>
+    </div>
+    <div class="project-box" data-project="Business Landing Page">
+      <div class="project-img" style="background-image: url('project5.jpg');"></div>
+      <div class="project-description">
+        <h3>Business Landing Page</h3>
+        <p>A high-converting responsive landing page designed for startups and businesses.</p>
+      </div>
+      <a href="https://github.com" target="_blank" class="repo-link">View</a>
+    </div>
+    <div class="project-box" data-project="Chat Application">
+      <div class="project-img" style="background-image: url('project6.jpg');"></div>
+      <div class="project-description">
+        <h3>Chat Application</h3>
+        <p>A real-time chat application enabling instant messaging between users.
+        </p>
+      </div>
+      <a href="https://github.com" target="_blank" class="repo-link">View</a>
+    </div>
+    
+  </div>
+
+  <script src="script.js"></script>
+</body>
+
+</html>
