@@ -188,6 +188,8 @@ body::-webkit-scrollbar-thumb:hover,
   font-weight: bold;
   text-align: left;
   white-space: nowrap;
+  scrollbar-width: thin;
+  scrollbar-color: var(--scrollbar) transparent;
 }
 
 #orange {
